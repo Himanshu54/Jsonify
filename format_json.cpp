@@ -52,11 +52,11 @@ void print_json(int blanks, std::string json)
             else if (*it == '"')
             {
                 quoted = 1 - quoted;
-                std::cout<<*it;
+                std::cout << *it;
             }
             else
             {
-                std::cout<<*it;
+                std::cout << *it;
             }
         }
         else
@@ -73,12 +73,20 @@ void print_json(int blanks, std::string json)
 void read_file(std::string filename)
 {
     int blanks = 0;
-    std::ifstream is(filename, std::ifstream::binary);
-
-    while (!is.eof())
+    std::ifstream is;
+    is.open(filename, std::ifstream::in);
+    if (is.is_open())
     {
-        std::string json_line;
-        getline(is, json_line);
-        print_json(blanks, json_line);
+        while (!is.eof())
+        {
+            std::cout<<"WTh";
+            std::string json_line;
+            getline(is, json_line);
+            print_json(blanks, json_line);
+        }
+    }
+    else
+    {
+        std::cout << "Unable to read file...exitiing...\n";
     }
 }
